@@ -1,0 +1,11 @@
+EJEMPLOS DE REVISTA CON DESCARGAS
+1) Sube todos los archivos de esta carpeta a tu repositorio de GitHub (misma carpeta).
+2) En la consola: Revistas > Agregar revista > pega la URL raw de revista_descargas.lua
+   (p. ej. https://raw.githubusercontent.com/TU_USUARIO/TU_REPO/refs/heads/main/revista_descargas.lua)
+3) Elige un bloque verde y pulsa A > A para confirmar.
+FORMATOS
+ - Fondo (datos):  return { name=, preset="wave|snow|rain|stars|rainbow|bubbles", color={r,g,b}|nil, rainbow=true|false, speed=0.1-4, count=5-220, size=0.3-4, alpha=0.1-1 }
+ - Tema (datos):   return { name=, top={r,g,b}, bottom={r,g,b}, wave={r,g,b} }   (r,g,b entre 0 y 1)
+ - Musica: .ogg .mp3 .wav     Imagen (Galeria): .png .jpg .bmp .tga
+ - Juego: .zip con manifest.lua y main.lua (en la raiz o dentro de UNA carpeta). Los juegos son codigo: avisa siempre al jugador.
+ - Bloque:  { type="download", kind="game|music|image|theme|background", text="Nombre", url="archivo_o_URL", id="opcional (juegos)" }
