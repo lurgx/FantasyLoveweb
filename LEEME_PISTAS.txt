@@ -1,0 +1,33 @@
+CÓMO CREAR PISTAS PARA HOVER RUSH (dibujándolas en una imagen)
+================================================================
+1) Dibuja en cualquier programa (Paint, Krita, GIMP, el celular...) una imagen CUADRADA o rectangular de unos 256x256 px:
+   - Fondo NEGRO.
+   - La pista es UNA LÍNEA CERRADA (un circuito) de cualquier color que no sea negro. Grosor: 4 a 7 px. Sin huecos, sin cruces, sin ramas.
+   - SALIDA: un punto VERDE (0,255,0) de ~8 px sobre la línea. Si no pones verde, empieza en un punto cualquiera.
+   - BOOSTS: puntos ROJOS (255,0,0) de ~6 px sobre la línea. Cada punto = un pad de boost. Si no pones ninguno, se reparten 4 solos.
+   - Imágenes grandes se reducen a 256 px: usa líneas gruesas (>=4 px a 256 px) para que no se pierdan.
+   - Sentido de la carrera: horario por defecto; con  reverse = true  va al revés.
+   - Las curvas cerradas del dibujo se vuelven curvas cerradas en el juego. Una pista más larga = vueltas más largas.
+2) (Opcional) RELIEVE: otra imagen igual de grande, en escala de grises: negro = bajo, blanco = alto. Pinta ancho (9-11 px) a lo largo de la
+   pista con el tono de altura que quieras (el juego lee el tono bajo la línea).
+3) Crea un archivo de datos  tracks/mi_pista.lua  (junto a tus imágenes):
+       return {
+         name   = "Mi pista",            -- nombre en el menú
+         sub    = "Descripción corta",
+         image  = "tracks/mi_pista.png", -- la imagen del trazado
+         height = "tracks/mi_pista_h.png", -- (opcional) imagen de relieve
+         relief = 22,                    -- (opcional) cuánto sube el relieve (por defecto 24)
+         theme  = 1,                     -- 1 = Neon City, 2 = Canyon Run, 3 = Glacier Loop (colores y ambiente)
+         hard   = 5,                     -- dureza de las curvas (3 suave ... 7 muy cerrada; por defecto 5)
+         segments = 2000,                -- (opcional) largo de la pista en segmentos (500..4000); por defecto según el dibujo
+         reverse = false,                -- (opcional) sentido contrario
+         colors = { fog = {1,0.5,0.5} }, -- (opcional) cambia colores de la plantilla elegida (sky, road, rumble, grass, lane, fog, pylon, boostc...)
+       }
+4) DÓNDE PONERLO: en el almacenamiento de la consola, carpeta  GameData/HoverRush/tracks/  (el juego también trae ejemplos en su propia carpeta tracks/).
+   Si no hay acceso a esa carpeta, descarga la pista desde una REVISTA (ver abajo).
+5) COMPARTIR POR REVISTA: sube mi_pista.lua y mi_pista.png (y _h.png) a tu GitHub y en tu revista agrega 2-3 bloques:
+       { type = "download", kind = "gamedata", game = "HoverRush", path = "tracks/mi_pista.lua",  text = "Mi pista", url = "mi_pista.lua" },
+       { type = "download", kind = "gamedata", game = "HoverRush", path = "tracks/mi_pista.png",  text = "Mi pista (imagen)", url = "mi_pista.png" },
+   El jugador descarga los dos y la pista aparece sola en el juego. (Ver ejemplos_revista/ con "Trébol".)
+6) Si la pista no sale: el juego muestra el motivo al elegirla ("no es un circuito cerrado", "no se encontró la imagen"...). Revisa huecos o
+   cruces en la línea, y que las rutas del .lua coincidan con los nombres de archivo.
